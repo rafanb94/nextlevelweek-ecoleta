@@ -43,7 +43,7 @@ form fieldset {
     border: 0;
 }
 
-form legend {
+form fieldset legend {
     margin-bottom: 40px;
     display: flex;
 }
