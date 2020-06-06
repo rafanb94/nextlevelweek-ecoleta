@@ -2,7 +2,7 @@
 {% set pageId = "page-search-results" %}
 
 {% block styles %}
-    <link rel="stylesheet" href="/styles/search-results.css" />
+    <link rel="stylesheet" href="/styles/search-results.css"/>
 {% endblock styles %}
 
 {% block title %}
@@ -10,28 +10,29 @@
 {% endblock title %}
 
 {% block content %}
-      {% include "page-header.html" %}
+    {% include "page-header.html" %}
     <main>
-        <h4>2 pontos encontrados</h4>
 
-        <div class="cards">
-            <div class="card">
-                <img src="/assets/eletronicos.svg" alt=colectoria>
-                <h2>Colectoria</h2>
-                <h3>Resíduos Eletrônicos, Lâmpadas</h3>
-                <p> Rio do Sul, Santa Catarina<br>Guilherme Gemballa, Jardim
-                    América<br>Nº 260
-                </p>
-            </div>
+        {% if total > 0 %}
+            <h4>{{total}}
+                pontos encontrados</h4>
 
-            <div class="card">
-                <img src="/assets/papeis-papelao.svg" alt=colectoria>
-                <h2>Papersider</h2>
-                <h3>Resíduos Eletrônicos, Lâmpadas</h3>
-                <p> Rio do Sul, Santa Catarina<br>Guilherme Gemballa, Jardim
-                    América<br>Nº 260
-                </p>
+            <div class="cards">
+                {% for place in places %}
+                    <div class="card">
+                        <img src="{{place.image}}" alt="{{place.name}}">
+                        <h2>{{place.name}}</h2>
+                        <h3>{{place.items}}</h3>
+                        <p>
+                            {{place.city}},
+                            {{place.state}}<br>{{place.address}},
+                            {{place.cep}}<br>
+                        </p>
+                    </div>
+                {% endfor %}
             </div>
-        </div>
+        {%else%}
+        <h3>Nenhum local encontrado</h3>
+        {% endif %}
     </main>
 {% endblock content %}
